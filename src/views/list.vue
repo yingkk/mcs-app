@@ -3,20 +3,23 @@
     <div class="list-query">
       <mt-header fixed title="固定在顶部"></mt-header>
     </div>
-    <div class="list-fill">
-      <mt-loadmore @top-status-change="handleTopChange">
-        <ul>
-          <li v-for="(item, index) in datas" :key="index">{{ item.name }}</li>
-        </ul>
-        <div slot="top" class="mint-loadmore-top">
-          <span
-            v-show="topStatus !== 'loading'"
-            :class="{ rotate: topStatus === 'drop' }"
-            >↓</span
-          >
-          <span v-show="topStatus === 'loading'">Loading...</span>
+    <div
+      class="list-fill"
+      v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="loading"
+      infinite-scroll-distance="10"
+    >
+      <div
+        class="list-item"
+        v-for="(item, index) in datas"
+        :key="index"
+        @click="handleClick(item.id)"
+      >
+        <div class="list-item-icon">
+          <div class="list-item-icon-inner"></div>
         </div>
-      </mt-loadmore>
+        <div class="list-item-text">{{ item.name }}</div>
+      </div>
     </div>
     <router-view></router-view>
   </div>
@@ -26,7 +29,7 @@
 export default {
   data() {
     return {
-      topStatus: '',
+      loading: false,
       datas: [
         {
           id: 1,
@@ -82,8 +85,15 @@ export default {
     };
   },
   methods: {
-    handleTopChange(status) {
-        this.topStatus = status;
+    loadMore() {
+      this.loading = true;
+      setTimeout(() => {
+        let last = this.datas[this.datas.length - 1];
+        for (let i = 1; i <= 10; i++) {
+          this.datas.push(last);
+        }
+        this.loading = false;
+      }, 2500);
     },
     handleClick(id) {
       this.$router.push({ name: "listDetail", query: { id: id } });
@@ -102,8 +112,7 @@ export default {
   .list-query {
     width: 100%;
     flex: none;
-    height: 50px;
-    min-height: 120vh;
+    height: 40px;
   }
   .list-fill {
     width: 100%;
