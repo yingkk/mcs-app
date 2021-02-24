@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,12 +26,23 @@ const routes = [
     },
     children: [
       {
-        path: "/listDetail",
+        path: "listDetail",
         name: "listDetail",
-        component: () =>import("../views/listDetail.vue")
+        component: () =>import("../views/listDetail.vue"),
+        meta: {
+          title: '藏品详情'
+        }
       }
     ]
   },
+  // {
+  //     path: "/listDetail",
+  //     name: "listDetail",
+  //     component: () =>import("../views/listDetail.vue"),
+  //     meta: {
+  //       title: '藏品详情'
+  //     }
+  // },
   {
     path: '/audit',
     name: 'audit',
@@ -36,9 +52,12 @@ const routes = [
     },
     children: [
       {
-        path: "/auditDetail",
+        path: "auditDetail",
         name: "auditDetail",
         component: () =>import("../views/auditDetail.vue"),
+        meta: {
+          title: '审核详情'
+        }
       }
     ]
   }
