@@ -3,17 +3,17 @@
 // const isProd = process.env.NODE_ENV === "product";
 
 module.exports = {
-  css: {
-    loaderOptions: {
-        postcss: {
-            plugins: [
-                require('postcss-px2rem')({
-                    remUnit: 75
-                }), 
-        ]
-      }
-    }
-  },
+  // css: {
+  //   loaderOptions: {
+  //       postcss: {
+  //           plugins: [
+  //               require('postcss-px2rem')({
+  //                   remUnit: 75
+  //               }), 
+  //       ]
+  //     }
+  //   }
+  // },
   // configureWebpack: {
   //   plugins: [
   //     new webpack.DefinePlugin({
