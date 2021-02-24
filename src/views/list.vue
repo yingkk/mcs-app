@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     handleClick(id) {
-      this.$router.push({ path: "/listDetail", query: { id: id } });
+      this.$router.push({ name: "listDetail", query: { id: id } });
     },
   },
 };
@@ -90,7 +90,8 @@ export default {
   height: 100%;
   padding: 0 10px;
   box-sizing: border-box;
-
+  display: flex;
+  flex-direction: column;
   .list-query {
     width: 100%;
     height: 100px;
@@ -99,6 +100,7 @@ export default {
   .list-fill {
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     .list-item {
       width: 100%;
       height: 175px;
