@@ -21,9 +21,12 @@ const routes = [
     },
     children: [
       {
-        path: "/listDetail",
+        path: "listDetail",
         name: "listDetail",
-        component: () =>import("../views/listDetail.vue")
+        component: () =>import("../views/listDetail.vue"),
+        meta: {
+          title: '藏品详情'
+        }
       }
     ]
   },
@@ -36,9 +39,12 @@ const routes = [
     },
     children: [
       {
-        path: "/auditDetail",
+        path: "auditDetail",
         name: "auditDetail",
         component: () =>import("../views/auditDetail.vue"),
+        meta: {
+          title: '审核详情'
+        }
       }
     ]
   }
