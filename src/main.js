@@ -4,8 +4,12 @@ import router from "./router";
 import store from "./store";
 import mixins from "./mixins";
 import MintUI from "mint-ui";
-import "mint-ui/lib/style.css";
+
 import "normalize.css/normalize.css";
+import "mint-ui/lib/style.css";
+
+
+import "./sheet/app.scss";
 // import "lib-flexible/flexible.js";
 
 Vue.config.productionTip = false;

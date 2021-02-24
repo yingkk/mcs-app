@@ -35,14 +35,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //     path: "/listDetail",
-  //     name: "listDetail",
-  //     component: () =>import("../views/listDetail.vue"),
-  //     meta: {
-  //       title: '藏品详情'
-  //     }
-  // },
   {
     path: '/audit',
     name: 'audit',
