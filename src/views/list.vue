@@ -1,7 +1,12 @@
 <template>
   <div class="list">
     <div class="list-query">
-      <mt-header fixed title="固定在顶部"></mt-header>
+      <mt-header title="固定在顶部">
+        <router-link to="/" slot="left">
+          <mt-button icon="back">返回</mt-button>
+        </router-link>
+        <mt-button icon="more" slot="right"></mt-button>
+      </mt-header>
     </div>
     <div
       class="list-fill"
@@ -20,6 +25,7 @@
         </div>
         <div class="list-item-text">{{ item.name }}</div>
       </div>
+      <div class="loading" v-show="loading"><mt-spinner type="snake" color="#26a2ff"></mt-spinner></div>
     </div>
     <router-view></router-view>
   </div>
@@ -102,7 +108,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .list {
   width: 100%;
   height: 100%;
@@ -112,12 +118,21 @@ export default {
   .list-query {
     width: 100%;
     flex: none;
-    height: 40px;
+    .mint-header {
+      height: 72px;
+    }
   }
   .list-fill {
     width: 100%;
     height: 100%;
     overflow-y: auto;
+    .loading{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 0;
+    }
     .list-item {
       width: 100%;
       height: 75px;
