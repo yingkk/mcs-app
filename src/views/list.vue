@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     handleClick(id) {
-      this.$router.push({ path: "/list/listDetail", query: { id: id } });
+      this.$router.push({ path: "/listDetail", query: { id: id } });
     },
   },
 };
