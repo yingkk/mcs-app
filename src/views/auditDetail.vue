@@ -42,7 +42,7 @@
               :key="index"
               @click="handleClick(item.id)"
             >
-              <div class="item-icon">
+              <div class="item-icon reset">
                 <div class="item-icon-inner"></div>
               </div>
               <div class="item-content">
