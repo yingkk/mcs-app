@@ -40,7 +40,7 @@ const routes = [
     name: 'audit',
     component: () => import('../views/audit.vue'),
     meta: {
-      title: '藏品审核'
+      title: '入藏申请'
     },
     children: [
       {
@@ -52,6 +52,14 @@ const routes = [
         }
       }
     ]
+  },
+  {
+    path: '/auditHistory',
+    name: 'auditHistory',
+    component: () => import('../views/auditHistory.vue'),
+    meta: {
+      title: '审核记录'
+    }
   }
 ]
 

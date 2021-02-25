@@ -1,12 +1,7 @@
 <template>
-  <div class="audit">
+  <div class="audit-history">
     <div class="top">
       <search @searchText="handleTextChange"></search>
-      <div class="audit-history" @click="handleAuditHistory">
-        <div class="audit-history-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-      </div>
     </div>
     <div
       class="main"
@@ -14,12 +9,7 @@
       infinite-scroll-disabled="loading"
       infinite-scroll-distance="10"
     >
-      <div
-        :class="['item', selectedId === item.id ? 'active' : '']"
-        v-for="(item, index) in datas"
-        :key="index"
-        @click="handleClick(item.id)"
-      >
+      <div class="item" v-for="(item, index) in datas" :key="index">
         <div class="item-icon">
           <div class="item-icon-inner"></div>
         </div>
@@ -30,12 +20,12 @@
               <span class="item-content-des">2021/02/24</span>
             </div>
             <div class="item-content-right">
-              <span class="audit-op" @click.stop="handleCollect(item.id)">
-                <i class="fa fa-database"></i>
-              </span>
-              <span class="audit-op" @click.stop="handleAttach(item.id)">
-                <i class="fa fa-paperclip"></i>
-              </span>
+              <span v-if="item.status === '1'" class="audit-status pass"
+                >已通过</span
+              >
+              <span v-if="item.status === '0'" class="audit-status unpass"
+                >不通过</span
+              >
             </div>
           </div>
         </div>
@@ -45,7 +35,6 @@
         <span class="loading-text"> 加载中...</span>
       </div>
     </div>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -62,51 +51,61 @@ export default {
           id: 1,
           icon: "1",
           title: "入藏申请1",
+          status: "1",
         },
         {
           id: 2,
           icon: "2",
           title: "入藏申请2",
+          status: "1",
         },
         {
           id: 3,
           icon: "3",
           title: "入藏申请3",
+          status: "1",
         },
         {
           id: 4,
           icon: "4",
           title: "入藏申请4",
+          status: "1",
         },
         {
           id: 5,
           icon: "5",
           title: "入藏申请5",
+          status: "1",
         },
         {
           id: 6,
           icon: "6",
           title: "入藏申请6",
+          status: "1",
         },
         {
           id: 7,
           icon: "7",
           title: "入藏申请7",
+          status: "1",
         },
         {
           id: 8,
           icon: "8",
           title: "入藏申请8",
+          status: "1",
         },
         {
           id: 9,
           icon: "9",
           title: "入藏申请9",
+          status: "1",
         },
         {
           id: 10,
           icon: "10",
           title: "入藏申请10",
+          status: "1",
         },
       ],
     };
@@ -127,6 +126,7 @@ export default {
             id: last.id + i,
             icon: last.id + i,
             title: "入藏申请" + (last.id + i),
+            status: "0",
           });
         }
         this.loading = false;
@@ -135,15 +135,6 @@ export default {
     handleClick(id) {
       this.selectedId = id;
       this.$router.push({ name: "auditDetail", query: { id: id } });
-    },
-    handleAuditHistory() {
-      this.$router.push({ name: "auditHistory" });
-    },
-    handleCollect(id) {
-      console.log(id);
-    },
-    handleAttach(id) {
-      console.log(id);
     },
   },
   components: {
