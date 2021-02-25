@@ -164,7 +164,6 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 16px;
   box-sizing: border-box;
   background-color: #fff;
   .audit-detail-inner {
@@ -174,19 +173,20 @@ export default {
     flex-direction: column;
 
     .detail-inner-top {
-      width: 100%;
       height: 100%;
-
+      overflow-y: auto;
+      padding: 16px;
+      padding-bottom: 0;
       .baseinfo {
         display: flex;
         flex-direction: column;
         height: 225px;
         overflow-y: auto;
-
         .baseinfo-item {
           display: flex;
           flex-direction: column;
           margin-top: 16px;
+          flex: none;
           // .baseinfo-item-des {
           //   display: block;
           //   width: 100%;
@@ -242,8 +242,7 @@ export default {
       }
     }
     .detail-inner-bottom {
-      width: 100%;
-      margin-top: 16px;
+      padding: 16px;
       height: 34px;
       flex: none;
       z-index: 1;
