@@ -32,7 +32,7 @@
         </div>
         <hr class="divide-line" />
         <div class="otherinfo">
-          <span class="baseinfo-item-des"
+          <span class="baseinfo-item-des reset-pd"
             >本入藏申请的详细藏品及附件信息，请浏览藏品和附件列表。</span
           >
           <div class="main">
@@ -42,7 +42,7 @@
               :key="index"
               @click="handleClick(item.id)"
             >
-              <div class="item-icon reset">
+              <div class="item-icon">
                 <div class="item-icon-inner"></div>
               </div>
               <div class="item-content">
@@ -84,6 +84,7 @@
         </div>
       </div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -150,7 +151,7 @@ export default {
     handleClick(id) {
       this.selectedId = id;
       console.log(this.selectedId);
-      //this.$router.push({ name: "auditDetail", query: { id: id } });
+      this.$router.push({ name: "attachDetail", query: { id: id } });
     },
   },
 };
@@ -175,13 +176,14 @@ export default {
     .detail-inner-top {
       height: 100%;
       overflow-y: auto;
-      padding: 16px;
+      // padding: 16px;
       padding-bottom: 0;
       .baseinfo {
         display: flex;
         flex-direction: column;
-        height: 225px;
-        overflow-y: auto;
+        padding: 16px 16px 0 16px;
+        // height: 225px;
+        // overflow-y: auto;
         .baseinfo-item {
           display: flex;
           flex-direction: column;
@@ -218,7 +220,7 @@ export default {
       }
       .otherinfo {
         width: 100%;
-        height: 225px;
+        // height: 225px;
         display: flex;
         flex-direction: column;
       }
@@ -227,6 +229,8 @@ export default {
         width: 100%;
         display: flex;
         flex-direction: column;
+        padding: 0 16px;
+        box-sizing: border-box;
 
         .opinion-text {
           width: 100%;
@@ -234,9 +238,10 @@ export default {
           margin-top: 8px;
           textarea {
             width: 100%;
-            height: 40px;
+            height: 60px;
             border: 1px solid #d3d2d2;
             box-sizing: border-box;
+            outline: none;
           }
         }
       }
@@ -263,6 +268,10 @@ export default {
   width: 100%;
   font-size: 14px;
   color: #777676;
+  box-sizing: border-box;
   flex: none;
+}
+.reset-pd {
+  padding: 0 16px;
 }
 </style>

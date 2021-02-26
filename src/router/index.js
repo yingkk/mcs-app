@@ -49,7 +49,17 @@ const routes = [
         component: () =>import("../views/auditDetail.vue"),
         meta: {
           title: '审核详情'
-        }
+        },
+        children: [
+          {
+            path: "attachDetail",
+            name: "attachDetail",
+            component: () => import("../views/attachDetail.vue"),
+            meta: {
+              title: '附件详情'
+            }
+          }
+        ]
       }
     ]
   },
