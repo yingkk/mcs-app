@@ -112,9 +112,6 @@ export default {
     };
   },
   methods: {
-    handleBarClick() {
-      this.isShowDrawer = !this.isShowDrawer;
-    },
     handleTextChange(data) {
       console.log(data);
     },

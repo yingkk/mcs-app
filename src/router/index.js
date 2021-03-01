@@ -52,12 +52,22 @@ const routes = [
         },
         children: [
           {
-            path: "attachDetail",
-            name: "attachDetail",
-            component: () => import("../views/attachDetail.vue"),
+            path: "collectionInfo",
+            name: "collectionInfo",
+            component: () => import("../views/collectionInfo.vue"),
             meta: {
-              title: '附件详情'
-            }
+              title: '藏品详情'
+            },
+            children: [
+              {
+                path: "attachContent",
+                name: "attachContent",
+                component: () => import("../views/attachContent.vue"),
+                meta: {
+                  title: '附件内容'
+                }
+              }
+            ]
           }
         ]
       }

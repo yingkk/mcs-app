@@ -151,7 +151,7 @@ export default {
     handleClick(id) {
       this.selectedId = id;
       console.log(this.selectedId);
-      this.$router.push({ name: "attachDetail", query: { id: id } });
+      this.$router.push({ name: "collectionInfo", query: { id: id } });
     },
   },
 };
@@ -176,25 +176,16 @@ export default {
     .detail-inner-top {
       height: 100%;
       overflow-y: auto;
-      // padding: 16px;
       padding-bottom: 0;
       .baseinfo {
         display: flex;
         flex-direction: column;
         padding: 16px 16px 0 16px;
-        // height: 225px;
-        // overflow-y: auto;
         .baseinfo-item {
           display: flex;
           flex-direction: column;
           margin-top: 16px;
           flex: none;
-          // .baseinfo-item-des {
-          //   display: block;
-          //   width: 100%;
-          //   font-size: 14px;
-          //   color: #777676;
-          // }
           .baseinfo-item-text {
             display: block;
             width: 100%;
@@ -212,12 +203,7 @@ export default {
           margin-top: 0;
         }
       }
-      .divide-line {
-        border: none;
-        height: 1px;
-        background-color: #d3d2d2;
-        margin: 16px 0;
-      }
+    
       .otherinfo {
         width: 100%;
         // height: 225px;
@@ -263,15 +249,5 @@ export default {
   padding: 0 20px;
 }
 
-.baseinfo-item-des {
-  display: block;
-  width: 100%;
-  font-size: 14px;
-  color: #777676;
-  box-sizing: border-box;
-  flex: none;
-}
-.reset-pd {
-  padding: 0 16px;
-}
+
 </style>

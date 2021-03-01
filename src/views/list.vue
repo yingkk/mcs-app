@@ -1,94 +1,197 @@
 <template>
   <div class="list">
-    <div class="list-query">
-      <mt-header title="固定在顶部">
-        <router-link to="/" slot="left">
-          <mt-button icon="back">返回</mt-button>
-        </router-link>
-        <mt-button icon="more" slot="right"></mt-button>
-      </mt-header>
+    <div class="top">
+      <div class="list-category" @click="handleShowCategory">
+        <div class="list-category-icon">
+          <i class="fa fa-bars"></i>
+        </div>
+      </div>
+      <search @searchText="handleTextChange"></search>
     </div>
-    <div
-      class="list-fill"
-      v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="10"
+
+    <mt-popup
+      v-if="isShowCategory"
+      v-model="isShowCategory"
+      popup-transition="popup-fade"
+      position="left"
     >
       <div
-        class="list-item"
-        v-for="(item, index) in datas"
-        :key="index"
-        @click="handleClick(item.id)"
+        class="main"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10"
       >
-        <div class="list-item-icon">
-          <div class="list-item-icon-inner"></div>
+        <div
+          :class="['item', activeCategory.id === item.id ? 'active' : '']"
+          v-for="(item, index) in categories"
+          :key="index"
+          @click="handleClickCategoryItem(item)"
+        >
+          <div class="item-icon">
+            <div class="item-icon-inner"></div>
+          </div>
+          <div class="item-content">
+            <div class="item-content-inner">
+              <div class="item-content-left">
+                <span class="item-content-title reset-width1">{{
+                  item.name
+                }}</span>
+                <span class="item-content-des reset-width1">今天11:09</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="list-item-text">{{ item.name }}</div>
       </div>
-      <div class="loading" v-show="loading"><mt-spinner type="snake" color="#26a2ff"></mt-spinner></div>
+    </mt-popup>
+    <div class="container">
+      <div class="cur-category">{{ activeCategory.name }}</div>
+      <div
+        class="main"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10"
+      >
+        <div
+          :class="['item', selectedId === item.id ? 'active' : '']"
+          v-for="(item, index) in datas"
+          :key="index"
+          @click="handleClick(item.id)"
+        >
+          <div class="item-icon">
+            <div class="item-icon-inner"></div>
+          </div>
+          <div class="item-content">
+            <div class="item-content-inner">
+              <div class="item-content-left">
+                <span class="item-content-title">{{ item.title }}</span>
+                <span class="item-content-des">2021/02/24</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="loading" v-show="loading">
+          <mt-spinner type="fading-circle" color="#1890ff"></mt-spinner>
+          <span class="loading-text"> 加载中...</span>
+        </div>
+      </div>
     </div>
+
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import search from "@/components/search.vue";
 export default {
   data() {
     return {
       loading: false,
+      isShowCategory: false,
+      selectedId: "",
+      activeCategory: {},
+      searchText: "",
       datas: [
         {
           id: 1,
           icon: "1",
-          name: "1"
+          title: "青釉布纹双系壶1",
         },
         {
           id: 2,
           icon: "2",
-          name: "2"
+          title: "青釉布纹双系壶2",
         },
         {
           id: 3,
           icon: "3",
-          name: "3"
+          title: "青釉布纹双系壶3",
         },
         {
           id: 4,
           icon: "4",
-          name: "4"
+          title: "青釉布纹双系壶4",
         },
         {
           id: 5,
           icon: "5",
-          name: "5"
+          title: "青釉布纹双系壶5",
         },
         {
           id: 6,
           icon: "6",
-          name: "6"
+          title: "青釉布纹双系壶6",
         },
         {
           id: 7,
           icon: "7",
-          name: "7"
+          title: "青釉布纹双系壶7",
         },
         {
           id: 8,
           icon: "8",
-          name: "8"
+          title: "青釉布纹双系壶8",
         },
         {
           id: 9,
           icon: "9",
-          name: "9"
+          title: "青釉布纹双系壶9",
         },
         {
           id: 10,
           icon: "10",
-          name: "10"
-        }
-      ]
+          title: "青釉布纹双系壶10",
+        },
+      ],
+      categories: [
+        {
+          id: "001",
+          name: "玉石器、宝石",
+        },
+        {
+          id: "002",
+          name: "陶器",
+        },
+        {
+          id: "003",
+          name: "瓷器",
+        },
+        {
+          id: "004",
+          name: "铜器",
+        },
+        {
+          id: "005",
+          name: "金银器",
+        },
+        {
+          id: "006",
+          name: "铁器、其他金属器",
+        },
+        {
+          id: "007",
+          name: "漆器",
+        },
+        {
+          id: "008",
+          name: "雕塑、造像",
+        },
+        {
+          id: "009",
+          name: "石器、石刻、砖瓦",
+        },
+        {
+          id: "010",
+          name: "test",
+        },
+        {
+          id: "011",
+          name: "test1",
+        },
+      ],
     };
+  },
+  created() {
+    this.activeCategory = this.categories[0];
   },
   methods: {
     loadMore() {
@@ -96,15 +199,87 @@ export default {
       setTimeout(() => {
         let last = this.datas[this.datas.length - 1];
         for (let i = 1; i <= 10; i++) {
-          this.datas.push(last);
+          this.datas.push({
+            id: last.id + i,
+            icon: last.id + i,
+            title: "青釉布纹双系壶" + (last.id + i),
+          });
         }
         this.loading = false;
       }, 2500);
     },
     handleClick(id) {
-      this.$router.push({ name: "listDetail", query: { id: id } });
-    }
-  }
+      this.selectedId = id;
+      this.$router.push({ name: "collectionInfo", query: { id: id } });
+    },
+    handleClickCategoryItem(item) {
+      this.activeCategory = item;
+      this.isShowCategory = false;
+      this.$router.push({ name: "list", query: { id: item.id } });
+      //todo query data by categoryId
+      this.datas = [
+        {
+          id: 1,
+          icon: "1",
+          title: "青釉1",
+        },
+        {
+          id: 2,
+          icon: "2",
+          title: "青釉2",
+        },
+        {
+          id: 3,
+          icon: "3",
+          title: "青釉3",
+        },
+        {
+          id: 4,
+          icon: "4",
+          title: "青釉4",
+        },
+        {
+          id: 5,
+          icon: "5",
+          title: "青釉5",
+        },
+        {
+          id: 6,
+          icon: "6",
+          title: "青釉6",
+        },
+        {
+          id: 7,
+          icon: "7",
+          title: "青釉7",
+        },
+        {
+          id: 8,
+          icon: "8",
+          title: "青釉8",
+        },
+        {
+          id: 9,
+          icon: "9",
+          title: "青釉9",
+        },
+        {
+          id: 10,
+          icon: "10",
+          title: "青釉10",
+        },
+      ];
+    },
+    handleShowCategory() {
+      this.isShowCategory = !this.isShowCategory;
+    },
+    handleTextChange(data) {
+      console.log(data);
+    },
+  },
+  components: {
+    search,
+  },
 };
 </script>
 
@@ -115,49 +290,21 @@ export default {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  .list-query {
-    width: 100%;
-    flex: none;
-    .mint-header {
-      height: 72px;
-    }
-  }
-  .list-fill {
+  .container {
     width: 100%;
     height: 100%;
-    overflow-y: auto;
-    .loading{
+    display: flex;
+    flex-direction: column;
+    .cur-category {
       width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 0;
-    }
-    .list-item {
-      width: 100%;
-      height: 75px;
-      display: flex;
-      align-items: stretch;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.03); /*no*/
+      height: 32px;
+      line-height: 32px;
+      padding: 0 16px;
       box-sizing: border-box;
-      .list-item-icon {
-        width: 75px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .list-item-icon-inner {
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background-color: rgb(237, 240, 242);
-        }
-      }
-      .list-item-text {
-        flex: 1;
-        padding: 16px 0;
-        overflow: hidden;
-      }
+      font-size: 18px;
+      font-weight: 600;
+      color: rgb(38, 149, 201);
+      flex: none;
     }
   }
 }
