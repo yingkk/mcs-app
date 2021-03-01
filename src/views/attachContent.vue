@@ -8,7 +8,7 @@
 
 <script>
 import "viewerjs/dist/viewer.css";
-// import Viewer from "viewerjs";
+import Viewer from "viewerjs";
 
 export default {
   data() {
