@@ -1,8 +1,10 @@
 <template>
-  <div class="attach-content">
-    <viewer :images="descImgs" class="descimgBox">
-      <img v-for="(decImg, index) in descImgs" :key="index" :src="decImg" />
-    </viewer>
+  <div class="attach-content" id="attach-content">
+    <ul :images="descImgs" class="descimgBox">
+      <li v-for="(decImg, index) in descImgs" :key="index">
+        <img :src="decImg" />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -11,8 +13,13 @@ import "viewerjs/dist/viewer.css";
 import Viewer from "viewerjs";
 
 export default {
-  components: {
-    Viewer
+  mounted() {
+    const viewer = new Viewer(document.getElementById("attach-content"), {
+      inline: true,
+      viewed() {
+        viewer.zoomTo(1);
+      },
+    });
   },
   data() {
     return {
