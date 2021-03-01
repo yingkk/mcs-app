@@ -11,6 +11,9 @@ import "viewerjs/dist/viewer.css";
 import Viewer from "viewerjs";
 
 export default {
+  components: {
+    Viewer
+  },
   data() {
     return {
       descImgs: [
