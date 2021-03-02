@@ -24,7 +24,7 @@
           </span>
           <div class="main">
             <div
-              :class="['item', selectedId === item.id ? 'active' : '']"
+              :class="['item', selected.id === item.id ? 'active' : '']"
               v-for="(item, index) in datas"
               :key="index"
               @click="handleClick(item)"
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import imageCard from "@/components/attachContent"
+import imageCard from "@/components/imgCard.vue"
 
 export default {
   components: {
@@ -62,7 +62,6 @@ export default {
   data() {
     return {
       selected: {},
-      selectedId: "",
       datas: [
         {
           id: 1,
@@ -125,7 +124,6 @@ export default {
   },
   methods: {
     handleClick(item) {
-      this.selectedId = item.id;
       this.selected = item;
       this.$refs.imageCard.show();
     },
