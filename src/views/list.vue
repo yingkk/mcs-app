@@ -44,6 +44,7 @@
       </div>
     </mt-popup>
     <div class="container">
+      <mt-loadmore :top-method="loadTop" ref="loadmore">
       <div class="cur-category">{{ activeCategory.name }}</div>
       <div
         class="main"
@@ -74,6 +75,7 @@
           <span class="loading-text"> 加载中...</span>
         </div>
       </div>
+      </mt-loadmore>
     </div>
 
     <router-view></router-view>
@@ -194,6 +196,12 @@ export default {
     this.activeCategory = this.categories[0];
   },
   methods: {
+    loadTop() {
+      // TODO
+      setTimeout(() => {
+        this.$refs.loadmore.onTopLoaded();
+      }, 2000);
+    },
     loadMore() {
       this.loading = true;
       setTimeout(() => {
@@ -295,6 +303,9 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    .mint-loadmore-content{
+      height: 100%;
+    }
     .cur-category {
       width: 100%;
       height: 32px;
