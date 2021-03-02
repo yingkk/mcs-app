@@ -33,10 +33,7 @@
           <div class="item-content">
             <div class="item-content-inner">
               <div class="item-content-left">
-                <span class="item-content-title">{{
-                  item.name
-                }}</span>
-                <!-- <span class="item-content-des">今天11:09</span> -->
+                <span class="item-content-title">{{ item.name }}</span>
               </div>
             </div>
           </div>
@@ -303,6 +300,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: hidden;
     touch-action: none;
     .mint-loadmore-content {
       height: 100%;
