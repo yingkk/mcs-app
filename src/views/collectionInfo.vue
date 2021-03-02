@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import imageCard from "@/components/attachContent"
+import imageCard from "@/components/imgCard.vue"
 
 export default {
   components: {

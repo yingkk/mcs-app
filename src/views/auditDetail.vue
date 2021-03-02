@@ -206,7 +206,6 @@ export default {
     
       .otherinfo {
         width: 100%;
-        // height: 225px;
         display: flex;
         flex-direction: column;
       }
