@@ -57,17 +57,7 @@ const routes = [
             component: () => import("../views/collectionInfo.vue"),
             meta: {
               title: '藏品详情'
-            },
-            children: [
-              {
-                path: "attachContent",
-                name: "attachContent",
-                component: () => import("../views/attachContent.vue"),
-                meta: {
-                  title: '附件内容'
-                }
-              }
-            ]
+            }
           }
         ]
       }

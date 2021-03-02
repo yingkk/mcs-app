@@ -27,7 +27,7 @@
               :class="['item', selectedId === item.id ? 'active' : '']"
               v-for="(item, index) in datas"
               :key="index"
-              @click="handleClick(item.id)"
+              @click="handleClick(item)"
             >
               <div class="item-icon">
                 <div class="item-icon-inner"></div>
@@ -48,58 +48,86 @@
       </div>
     </div>
     <router-view></router-view>
+    <image-card :imgs="selected.imgs" ref="imageCard"></image-card>
   </div>
 </template>
 
 <script>
+import imageCard from "@/components/attachContent"
+
 export default {
+  components: {
+    imageCard
+  },
   data() {
     return {
+      selected: {},
       selectedId: "",
       datas: [
         {
           id: 1,
           icon: "1",
           title: "正面-景德镇窑斗采莲池鸳鸯纹盘1",
+          imgs: [
+            "https://tse1-mm.cn.bing.net/th?id=OIP.fLI-fIeiAEMZwLhz6KkcMQAAAA&w=201&h=200&c=7&o=5&pid=1.7"
+          ],
         },
         {
           id: 2,
           icon: "2",
           title: "背面-景德镇窑斗采莲池鸳鸯纹盘2",
+          imgs: [
+            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2054532727,2657034360&fm=26&gp=0.jpg"
+          ],
         },
         {
           id: 3,
           icon: "3",
           title: "景德镇窑斗采莲池鸳鸯纹盘3",
+          imgs: [
+            "https://tse1-mm.cn.bing.net/th?id=OIP.fLI-fIeiAEMZwLhz6KkcMQAAAA&w=201&h=200&c=7&o=5&pid=1.7"
+          ],
         },
         {
           id: 4,
           icon: "4",
           title: "鉴定报告-景德镇窑斗采莲池鸳鸯纹盘4",
+          imgs: [
+            "https://tse1-mm.cn.bing.net/th?id=OIP.fLI-fIeiAEMZwLhz6KkcMQAAAA&w=201&h=200&c=7&o=5&pid=1.7"
+          ],
         },
         {
           id: 5,
           icon: "5",
           title: "景德镇窑斗采莲池鸳鸯纹盘5",
+          imgs: [
+            "https://tse1-mm.cn.bing.net/th?id=OIP.fLI-fIeiAEMZwLhz6KkcMQAAAA&w=201&h=200&c=7&o=5&pid=1.7"
+          ],
         },
         {
           id: 6,
           icon: "6",
           title: "景德镇窑斗采莲池鸳鸯纹盘6",
+          imgs: [
+            "https://tse1-mm.cn.bing.net/th?id=OIP.fLI-fIeiAEMZwLhz6KkcMQAAAA&w=201&h=200&c=7&o=5&pid=1.7"
+          ],
         },
         {
           id: 7,
           icon: "7",
           title: "景德镇窑斗采莲池鸳鸯纹盘7",
+          imgs: [
+            "https://tse1-mm.cn.bing.net/th?id=OIP.fLI-fIeiAEMZwLhz6KkcMQAAAA&w=201&h=200&c=7&o=5&pid=1.7"
+          ],
         },
       ],
     };
   },
   methods: {
-    handleClick(id) {
-      this.selectedId = id;
-      console.log(this.selectedId);
-      this.$router.push({ name: "attachContent", query: { id: id } });
+    handleClick(item) {
+      this.selectedId = item.id;
+      this.selected = item;
+      this.$refs.imageCard.show();
     },
   },
 };
