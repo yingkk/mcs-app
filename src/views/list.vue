@@ -43,41 +43,41 @@
         </div>
       </div>
     </mt-popup>
+
     <div class="container">
       <mt-loadmore :top-method="loadTop" ref="loadmore">
-      <div class="cur-category">{{ activeCategory.name }}</div>
-      <div
-        class="main"
-        v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="loading"
-        infinite-scroll-distance="10"
-      >
+        <div class="cur-category">{{ activeCategory.name }}</div>
         <div
-          :class="['item', selectedId === item.id ? 'active' : '']"
-          v-for="(item, index) in datas"
-          :key="index"
-          @click="handleClick(item.id)"
+          class="main"
+          v-infinite-scroll="loadMore"
+          infinite-scroll-disabled="loading"
+          infinite-scroll-distance="10"
         >
-          <div class="item-icon">
-            <div class="item-icon-inner"></div>
-          </div>
-          <div class="item-content">
-            <div class="item-content-inner">
-              <div class="item-content-left">
-                <span class="item-content-title">{{ item.title }}</span>
-                <span class="item-content-des">2021/02/24</span>
+          <div
+            :class="['item', selectedId === item.id ? 'active' : '']"
+            v-for="(item, index) in datas"
+            :key="index"
+            @click="handleClick(item.id)"
+          >
+            <div class="item-icon">
+              <div class="item-icon-inner"></div>
+            </div>
+            <div class="item-content">
+              <div class="item-content-inner">
+                <div class="item-content-left">
+                  <span class="item-content-title">{{ item.title }}</span>
+                  <span class="item-content-des">2021/02/24</span>
+                </div>
               </div>
             </div>
           </div>
+          <div class="loading" v-show="loading">
+            <mt-spinner type="fading-circle" color="#1890ff"></mt-spinner>
+            <span class="loading-text"> 加载中...</span>
+          </div>
         </div>
-        <div class="loading" v-show="loading">
-          <mt-spinner type="fading-circle" color="#1890ff"></mt-spinner>
-          <span class="loading-text"> 加载中...</span>
-        </div>
-      </div>
       </mt-loadmore>
     </div>
-
     <router-view></router-view>
   </div>
 </template>
@@ -303,7 +303,8 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    .mint-loadmore-content{
+    touch-action: none;
+    .mint-loadmore-content {
       height: 100%;
     }
     .cur-category {

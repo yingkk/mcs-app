@@ -30,10 +30,10 @@
               <span class="item-content-des">2021/02/24</span>
             </div>
             <div class="item-content-right">
-              <span class="audit-op" @click.stop="handleCollect(item.id)">
+              <span class="audit-op">
                 <i class="fa fa-database"></i>
               </span>
-              <span class="audit-op" @click.stop="handleAttach(item.id)">
+              <span class="audit-op">
                 <i class="fa fa-paperclip"></i>
               </span>
             </div>

@@ -23,17 +23,7 @@ const routes = [
     component: () => import('../views/list.vue'),
     meta: {
       title: '藏品列表'
-    },
-    children: [
-      {
-        path: "listDetail",
-        name: "listDetail",
-        component: () =>import("../views/listDetail.vue"),
-        meta: {
-          title: '藏品详情'
-        }
-      }
-    ]
+    }
   },
   {
     path: '/audit',
