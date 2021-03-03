@@ -43,32 +43,37 @@
 
     <div class="container">
       <div class="cur-category">{{ activeCategory.name }}</div>
-      <div class="warp">
-      <mt-loadmore :top-method="loadTop" ref="loadmore" :bottom-method="loadMore" :auto-fill="false" :bottom-all-loaded="allLoaded">
-        <div class="main"
+      <div class="loadmore">
+        <mt-loadmore
+          :top-method="loadTop"
+          ref="loadmore"
+          :bottom-method="loadMore"
+          :auto-fill="true"
+          :bottom-all-loaded="allLoaded"
         >
-          <div
-            :class="['item', selectedId === item.id ? 'active' : '']"
-            v-for="(item, index) in datas"
-            :key="index"
-            @click="handleClick(item.id)"
-          >
-            <div class="item-icon">
-              <div class="item-icon-inner">
-                <img src="../assets/logo.png" alt="">
+          <div class="main">
+            <div
+              :class="['item', selectedId === item.id ? 'active' : '']"
+              v-for="(item, index) in datas"
+              :key="index"
+              @click="handleClick(item.id)"
+            >
+              <div class="item-icon">
+                <div class="item-icon-inner">
+                  <img src="../assets/logo.png" alt="" />
+                </div>
               </div>
-            </div>
-            <div class="item-content">
-              <div class="item-content-inner">
-                <div class="item-content-left">
-                  <span class="item-content-title">{{ item.title }}</span>
-                  <span class="item-content-des">2021/02/24</span>
+              <div class="item-content">
+                <div class="item-content-inner">
+                  <div class="item-content-left">
+                    <span class="item-content-title">{{ item.title }}</span>
+                    <span class="item-content-des">2021/02/24</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </mt-loadmore>
+        </mt-loadmore>
       </div>
     </div>
     <router-view></router-view>
@@ -206,7 +211,7 @@ export default {
             title: "青釉布纹双系壶" + (last.id + i),
           });
         }
-        this.allLoaded = false;// 若数据已全部获取完毕
+        this.allLoaded = false; //this.allLoaded = true; 若数据已全部获取完毕
         this.$refs.loadmore.onBottomLoaded();
       }, 2500);
     },
@@ -298,12 +303,10 @@ export default {
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
-    .warp{
+    touch-action: none;
+    .loadmore {
       height: 100%;
       overflow-y: auto;
-    }
-    .mint-loadmore-content {
-      height: 100%;
     }
     .cur-category {
       width: 100%;
@@ -316,10 +319,10 @@ export default {
       color: rgb(38, 149, 201);
       flex: none;
     }
-    .main-wrap{
-      height: 100%;
-      overflow-y: auto;
-    }
+    // .main-wrap {
+    //   height: 100%;
+    //   overflow-y: auto;
+    // }
   }
 }
 </style>
