@@ -10,6 +10,7 @@ import "mint-ui/lib/style.css";
 
 import "./sheet/app.scss";
 import "font-awesome/scss/font-awesome.scss"
+import "nprogress/nprogress.css";
 
 
 Vue.config.productionTip = false;
