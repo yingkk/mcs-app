@@ -42,14 +42,9 @@
     </mt-popup>
 
     <div class="container">
-      <mt-loadmore :top-method="loadTop" ref="loadmore">
-        <div class="cur-category">{{ activeCategory.name }}</div>
-        <div class="main-wrap">
-        <div
-          class="main"
-          v-infinite-scroll="loadMore"
-          infinite-scroll-disabled="loading"
-          infinite-scroll-distance="10"
+      <div class="cur-category">{{ activeCategory.name }}</div>
+      <mt-loadmore :top-method="loadTop" ref="loadmore" :bottom-method="loadMore" :bottom-all-loaded="allLoaded">
+        <div class="main"
         >
           <div
             :class="['item', selectedId === item.id ? 'active' : '']"
@@ -76,7 +71,6 @@
             <span class="loading-text"> 加载中...</span>
           </div>
         </div>
-         </div>
       </mt-loadmore>
     </div>
     <router-view></router-view>
@@ -88,6 +82,7 @@ import search from "@/components/search.vue";
 export default {
   data() {
     return {
+      allLoaded: true,
       loading: false,
       isShowCategory: false,
       selectedId: "",
@@ -205,6 +200,7 @@ export default {
     },
     loadMore() {
       this.loading = true;
+      this.allLoaded = false;
       setTimeout(() => {
         let last = this.datas[this.datas.length - 1];
         for (let i = 1; i <= 10; i++) {
@@ -215,6 +211,8 @@ export default {
           });
         }
         this.loading = false;
+        this.allLoaded = true;// 若数据已全部获取完毕
+        this.$refs.loadmore.onBottomLoaded();
       }, 2500);
     },
     handleClick(id) {
