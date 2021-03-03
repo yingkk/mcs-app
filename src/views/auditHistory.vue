@@ -12,12 +12,7 @@
         :auto-fill="true"
         :bottom-all-loaded="allLoaded"
       >
-        <div
-          class="main"
-          v-infinite-scroll="loadMore"
-          infinite-scroll-disabled="loading"
-          infinite-scroll-distance="10"
-        >
+        <div class="main">
           <div class="item" v-for="(item, index) in datas" :key="index">
             <div class="item-icon">
               <div class="item-icon-inner"></div>
@@ -39,10 +34,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="loading" v-show="loading">
-        <mt-spinner type="fading-circle" color="#1890ff"></mt-spinner>
-        <span class="loading-text"> 加载中...</span>
-      </div> -->
         </div>
       </mt-loadmore>
     </div>
