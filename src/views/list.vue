@@ -82,7 +82,7 @@ import search from "@/components/search.vue";
 export default {
   data() {
     return {
-      allLoaded: true,
+      allLoaded: false,
       loading: false,
       isShowCategory: false,
       selectedId: "",
@@ -200,7 +200,7 @@ export default {
     },
     loadMore() {
       this.loading = true;
-      this.allLoaded = false;
+      this.allLoaded = true;
       setTimeout(() => {
         let last = this.datas[this.datas.length - 1];
         for (let i = 1; i <= 10; i++) {
@@ -211,7 +211,7 @@ export default {
           });
         }
         this.loading = false;
-        this.allLoaded = true;// 若数据已全部获取完毕
+        this.allLoaded = false;// 若数据已全部获取完毕
         this.$refs.loadmore.onBottomLoaded();
       }, 2500);
     },
