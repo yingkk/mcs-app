@@ -66,10 +66,6 @@
               </div>
             </div>
           </div>
-          <div class="loading" v-show="loading">
-            <mt-spinner type="fading-circle" color="#1890ff"></mt-spinner>
-            <span class="loading-text"> 加载中...</span>
-          </div>
         </div>
       </mt-loadmore>
     </div>
@@ -83,7 +79,6 @@ export default {
   data() {
     return {
       allLoaded: false,
-      loading: false,
       isShowCategory: false,
       selectedId: "",
       activeCategory: {},
@@ -199,7 +194,6 @@ export default {
       }, 2000);
     },
     loadMore() {
-      this.loading = true;
       this.allLoaded = true;
       setTimeout(() => {
         let last = this.datas[this.datas.length - 1];
@@ -210,7 +204,6 @@ export default {
             title: "青釉布纹双系壶" + (last.id + i),
           });
         }
-        this.loading = false;
         this.allLoaded = false;// 若数据已全部获取完毕
         this.$refs.loadmore.onBottomLoaded();
       }, 2500);
