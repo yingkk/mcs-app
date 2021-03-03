@@ -8,42 +8,52 @@
         </div>
       </div>
     </div>
-    <div
-      class="main"
-      v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="10"
-    >
-      <div
-        :class="['item', selectedId === item.id ? 'active' : '']"
-        v-for="(item, index) in datas"
-        :key="index"
-        @click="handleClick(item.id)"
+    <div class="loadmore">
+      <mt-loadmore
+        :top-method="loadTop"
+        ref="loadmore"
+        :bottom-method="loadMore"
+        :auto-fill="true"
+        :bottom-all-loaded="allLoaded"
       >
-        <div class="item-icon">
-          <div class="item-icon-inner"></div>
-        </div>
-        <div class="item-content">
-          <div class="item-content-inner">
-            <div class="item-content-left">
-              <span class="item-content-title">{{ item.title }}</span>
-              <span class="item-content-des">2021/02/24</span>
+        <div
+          class="main"
+          v-infinite-scroll="loadMore"
+          infinite-scroll-disabled="loading"
+          infinite-scroll-distance="10"
+        >
+          <div
+            :class="['item', selectedId === item.id ? 'active' : '']"
+            v-for="(item, index) in datas"
+            :key="index"
+            @click="handleClick(item.id)"
+          >
+            <div class="item-icon">
+              <div class="item-icon-inner"></div>
             </div>
-            <div class="item-content-right">
-              <span class="audit-op">
-                <i class="fa fa-database"></i>
-              </span>
-              <span class="audit-op">
-                <i class="fa fa-paperclip"></i>
-              </span>
+            <div class="item-content">
+              <div class="item-content-inner">
+                <div class="item-content-left">
+                  <span class="item-content-title">{{ item.title }}</span>
+                  <span class="item-content-des">2021/02/24</span>
+                </div>
+                <div class="item-content-right">
+                  <span class="audit-op">
+                    <i class="fa fa-database"></i>
+                  </span>
+                  <span class="audit-op">
+                    <i class="fa fa-paperclip"></i>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="loading" v-show="loading">
+            <mt-spinner type="fading-circle" color="#1890ff"></mt-spinner>
+            <span class="loading-text"> 加载中...</span>
+          </div>
         </div>
-      </div>
-      <div class="loading" v-show="loading">
-        <mt-spinner type="fading-circle" color="#1890ff"></mt-spinner>
-        <span class="loading-text"> 加载中...</span>
-      </div>
+      </mt-loadmore>
     </div>
     <router-view></router-view>
   </div>
@@ -54,9 +64,9 @@ import search from "@/components/search.vue";
 export default {
   data() {
     return {
+      allLoaded: false,
       selectedId: "",
       searchText: "",
-      loading: false,
       datas: [
         {
           id: 1,
@@ -115,8 +125,14 @@ export default {
     handleTextChange(data) {
       console.log(data);
     },
+    loadTop() {
+      // TODO
+      setTimeout(() => {
+        this.$refs.loadmore.onTopLoaded();
+      }, 2000);
+    },
     loadMore() {
-      this.loading = true;
+      this.allLoaded = true;
       setTimeout(() => {
         let last = this.datas[this.datas.length - 1];
         for (let i = 1; i <= 10; i++) {
@@ -126,7 +142,8 @@ export default {
             title: "入藏申请" + (last.id + i),
           });
         }
-        this.loading = false;
+        this.allLoaded = false; //this.allLoaded = true; 若数据已全部获取完毕
+        this.$refs.loadmore.onBottomLoaded();
       }, 2500);
     },
     handleClick(id) {

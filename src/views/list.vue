@@ -304,10 +304,6 @@ export default {
     flex-direction: column;
     overflow-y: hidden;
     touch-action: none;
-    .loadmore {
-      height: 100%;
-      overflow-y: auto;
-    }
     .cur-category {
       width: 100%;
       height: 32px;
