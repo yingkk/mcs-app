@@ -58,6 +58,13 @@
         height: 40px;
         border-radius: 50%;
         background-color: rgb(237, 240, 242);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: 30px;
+          display: block;
+        }
       }
     }
     .reset {
@@ -174,4 +181,3 @@
 .reset-pd {
   padding: 0 16px;
 }
-

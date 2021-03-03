@@ -88,6 +88,8 @@ module.exports = {
           "*": ""
         }
       }
-    }
+    },
+    //ngrok test
+    disableHostCheck: true
   }
 };

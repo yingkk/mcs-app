@@ -57,7 +57,9 @@
             @click="handleClick(item.id)"
           >
             <div class="item-icon">
-              <div class="item-icon-inner"></div>
+              <div class="item-icon-inner">
+                <img src="../assets/logo.png" alt="">
+              </div>
             </div>
             <div class="item-content">
               <div class="item-content-inner">
@@ -300,7 +302,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
+    overflow-y: auto;
     touch-action: none;
     .mint-loadmore-content {
       height: 100%;
