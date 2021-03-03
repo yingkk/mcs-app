@@ -302,8 +302,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    touch-action: none;
+    overflow-y: hidden;
     .mint-loadmore-content {
       height: 100%;
     }
