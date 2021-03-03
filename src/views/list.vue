@@ -44,6 +44,7 @@
     <div class="container">
       <mt-loadmore :top-method="loadTop" ref="loadmore">
         <div class="cur-category">{{ activeCategory.name }}</div>
+        <div class="main-wrap">
         <div
           class="main"
           v-infinite-scroll="loadMore"
@@ -75,6 +76,7 @@
             <span class="loading-text"> 加载中...</span>
           </div>
         </div>
+         </div>
       </mt-loadmore>
     </div>
     <router-view></router-view>
@@ -316,6 +318,10 @@ export default {
       font-weight: 600;
       color: rgb(38, 149, 201);
       flex: none;
+    }
+    .main-wrap{
+      height: 100%;
+      overflow-y: auto;
     }
   }
 }
