@@ -22,6 +22,14 @@ const routes = [
     }
   },
   {
+    path: "/auth",
+    name: "auth",
+    component: () => import("../views/auth.vue"),
+    meta: {
+      title: "用户授权"
+    }
+  },
+  {
     path: "/list",
     name: "list",
     component: () => import("../views/list.vue"),

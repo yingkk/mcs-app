@@ -1,12 +1,15 @@
 <template>
   <div class="search">
-    <input
-      v-model="searchText"
-      type="text"
-      placeholder="搜索"
-      class="search-input"
-      @input="handleSearchTextChange"
-    />
+    <form class="search-block" action="javascript:void 0">
+      <input
+        v-model="searchText"
+        type="text"
+        placeholder="搜索"
+        class="search-input"
+        @keyup.enter="handleSearchTextChange"
+        @input="handleSearchTextChange"
+      />
+    </form>
     <span class="search-prefix">
       <i class="fa fa-search"></i>
     </span>
