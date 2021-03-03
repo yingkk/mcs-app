@@ -43,7 +43,8 @@
 
     <div class="container">
       <div class="cur-category">{{ activeCategory.name }}</div>
-      <mt-loadmore :top-method="loadTop" ref="loadmore" :bottom-method="loadMore" :bottom-all-loaded="allLoaded">
+      <div class="warp">
+      <mt-loadmore :top-method="loadTop" ref="loadmore" :bottom-method="loadMore" :auto-fill="false" :bottom-all-loaded="allLoaded">
         <div class="main"
         >
           <div
@@ -68,6 +69,7 @@
           </div>
         </div>
       </mt-loadmore>
+      </div>
     </div>
     <router-view></router-view>
   </div>
@@ -296,6 +298,10 @@ export default {
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
+    .warp{
+      height: 100%;
+      overflow-y: auto;
+    }
     .mint-loadmore-content {
       height: 100%;
     }
