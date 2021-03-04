@@ -7,7 +7,6 @@
         placeholder="搜索"
         class="search-input"
         @keyup.enter="handleSearchTextChange"
-        @input="handleSearchTextChange"
       />
     </form>
     <span class="search-prefix">
@@ -27,15 +26,18 @@ export default {
       isShowClear: false,
     };
   },
+  watch: {
+    searchText(val) {
+      this.isShowClear = val ? true : false;
+    },
+  },
   methods: {
     handleSearchTextChange() {
       this.$emit("searchText", this.searchText);
-      this.isShowClear = this.searchText ? true : false;
     },
     handleClear() {
       this.searchText = "";
       this.$emit("searchText", this.searchText);
-      this.isShowClear = false;
     },
   },
 };

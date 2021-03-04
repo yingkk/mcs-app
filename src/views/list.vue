@@ -223,7 +223,7 @@ export default {
       this.activeCategory = item;
       this.isShowCategory = false;
       this.$router.push({ name: "list", query: { id: item.id } });
-      //todo query data by categoryId
+      //TODO query data by categoryId
       this.datas = [
         {
           id: 1,
@@ -282,6 +282,7 @@ export default {
     },
     handleTextChange(data) {
       console.log(data);
+      //TODO query and reset datas
     },
   },
   components: {
