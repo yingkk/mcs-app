@@ -85,6 +85,7 @@ import search from "@/components/search.vue";
 export default {
   data() {
     return {
+      code: '',
       allLoaded: false,
       isShowCategory: false,
       selectedId: "",
@@ -191,6 +192,8 @@ export default {
     };
   },
   created() {
+    //TODO confirm isUse
+    this.code = this.$route.query.code;
     this.activeCategory = this.categories[0];
   },
   methods: {

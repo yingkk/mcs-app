@@ -55,6 +55,7 @@ import search from "@/components/search.vue";
 export default {
   data() {
     return {
+      code: '',
       allLoaded: false,
       selectedId: "",
       searchText: "",
@@ -111,6 +112,9 @@ export default {
         },
       ],
     };
+  },
+  created(){
+    this.code = this.$route.query.code;
   },
   methods: {
     handleTextChange(data) {
