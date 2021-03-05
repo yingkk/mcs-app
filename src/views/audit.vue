@@ -58,7 +58,6 @@ export default {
       code: '',
       allLoaded: false,
       selectedId: "",
-      searchText: "",
       datas: [
         {
           id: 1,

@@ -90,7 +90,6 @@ export default {
       isShowCategory: false,
       selectedId: "",
       activeCategory: {},
-      searchText: "",
       datas: [
         {
           id: 1,
@@ -225,6 +224,7 @@ export default {
     handleClickCategoryItem(item) {
       this.activeCategory = item;
       this.isShowCategory = false;
+      //TODO beforeRouteUpdate
       this.$router.push({ name: "list", query: { id: item.id } });
       //TODO query data by categoryId
       this.datas = [
@@ -307,7 +307,6 @@ export default {
     display: flex;
     flex-direction: column;
     overflow-y: hidden;
-    touch-action: none;
     .cur-category {
       width: 100%;
       height: 32px;

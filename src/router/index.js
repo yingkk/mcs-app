@@ -13,22 +13,22 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/login",
-    name: "login",
-    component: () => import("../views/login.vue"),
-    meta: {
-      title: "用户登录"
-    }
-  },
-  {
-    path: "/auth",
-    name: "auth",
-    component: () => import("../views/auth.vue"),
-    meta: {
-      title: "用户授权"
-    }
-  },
+  // {
+  //   path: "/login",
+  //   name: "login",
+  //   component: () => import("../views/login.vue"),
+  //   meta: {
+  //     title: "用户登录"
+  //   }
+  // },
+  // {
+  //   path: "/auth",
+  //   name: "auth",
+  //   component: () => import("../views/auth.vue"),
+  //   meta: {
+  //     title: "用户授权"
+  //   }
+  // },
   {
     path: "/list",
     name: "list",
@@ -86,6 +86,7 @@ router.afterEach(() => {
 });
 
 router.beforeEach((to, from, next) => {
+  //TODO userinfo是否存在，不存在getuserinfo and save
   const {
     meta: { title }
   } = to;
